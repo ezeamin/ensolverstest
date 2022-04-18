@@ -1,17 +1,33 @@
-const express = require('express');
-const morgan = require('morgan');
+require("dotenv").config();
+
+const express = require("express");
+const morgan = require("morgan");
+
 const app = express();
+const sequelize = require("./database/db");
 
+// Require routes
+const authRoutes = require("./routes/auth");
 
-// Settings
-app.set("port", process.env.PORT || 3000);
-app.set(express.json());
-app.set(express.urlencoded({extended: false}));
+// Settings & middlewares
+app.set("port", process.env.PORT || 5000);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan("dev"));
 
-// Middleware
-app.use(morgan(dev));
+// Routes
+app.use("/api/auth",authRoutes);
 
 // Server start
 app.listen(app.get("port"), () => {
-    console.log("Server on port", app.get("port"));
+  console.log("Server on port", app.get("port"));
+
+  sequelize
+    .sync({ force: false }) // force: true -> drop tables
+    .then(() => {
+      console.log("Database connected");
+    })
+    .catch((err) => {
+      console.log("Error connecting to database", err);
+    });
 });
