@@ -56,8 +56,6 @@ const AuthForm = (props) => {
     const data = { username, password };
     if (props.type === "login") signin(data);
     else signup(data);
-
-    setLoading(false);
   };
 
   // signup
@@ -65,6 +63,8 @@ const AuthForm = (props) => {
     (info) => fetchData("post", "/api/auth/signup", info),
     {
       onSuccess: (data) => {
+        setLoading(false);
+
         if (!data || data.status !== 200) {
           setError(data ? data.data.message : "Error creating user");
         } else {
@@ -80,6 +80,8 @@ const AuthForm = (props) => {
         }
       },
       onError: (data) => {
+        setLoading(false);
+
         let msg = data.text();
         setError(msg);
       },
