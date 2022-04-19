@@ -32,11 +32,9 @@ const NewPost = (props) => {
       } else {
         setPost("");
         Swal.fire({
-          title: "Success",
-          text: "Post saved",
           icon: "success",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 1000,
         }).then(() => {
           if (props.type === "edit") {
             navigate("/app"); //back to main page

@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { fetchData } from "../api/fetchFunctions";
 import BackButton from "../components/BackButton";
 import Box from "../components/Box";
+import EditPanel from "../components/EditPanel";
 import NewPost from "../components/NewPost";
 import Title from "../components/Title";
 
@@ -13,7 +14,7 @@ const EditPost = () => {
 
   const [post, setPost] = React.useState({});
 
-  const { isLoading, isFetching } = useQuery(
+  const { isSuccess } = useQuery(
     ["post", id],
     () => fetchData("get", `/api/posts/${id}`),
     {
@@ -28,10 +29,7 @@ const EditPost = () => {
   return (
     <Box>
       <Title title="Editing post" />
-      <p className="mb-0">Old: {post.text}</p>
-      <p className="mb-0">New:</p>
-      <NewPost type="edit" {...post} />
-      <BackButton />
+      <EditPanel post={post} isSuccess={isSuccess}/>
     </Box>
   );
 };

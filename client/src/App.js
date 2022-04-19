@@ -4,6 +4,8 @@ import "./App.css";
 import Auth from "./views/Auth";
 import EditPost from "./views/EditPost";
 import Main from "./views/Main";
+import "./style/auth.css";
+import "./style/posts.css";
 
 function App() {
   return (

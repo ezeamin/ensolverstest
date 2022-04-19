@@ -1,0 +1,25 @@
+/* Posts Form */
+
+.formArea{
+    padding-top: 20px;
+  }
+  
+  /* List */
+  
+  .list__container{
+    max-height: 45vh;
+    overflow: scroll;
+    padding: 0 15px 0 0;
+  }
+  
+  .postList{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list__button--reset{
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
