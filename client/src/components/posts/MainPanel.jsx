@@ -1,19 +1,19 @@
 import React from "react";
 import List from "./List";
-import Loading from "./Loading";
-import NewPost from "./NewPost";
+import Loading from "../global/Loading";
+import NewPost from "../NewPost";
 
 const MainPanel = (props) => {
-  const { posts, isLoading, isSuccess } = props;
+  const { posts, isSuccess } = props;
 
-  if (isLoading) {
+  if (posts.length === 0 || !isSuccess) {
     return <Loading />;
   }
   return (
     <div>
       <h3>Posts</h3>
       <div className="list__container">
-        {posts.length === 0 && !isSuccess ? (
+        {posts.length === 0 && isSuccess ? (
           <p>No data</p>
         ) : (
           <List posts={posts} />

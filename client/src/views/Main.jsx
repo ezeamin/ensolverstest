@@ -1,15 +1,15 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchData } from "../api/fetchFunctions";
-import Box from "../components/Box";
+import Box from "../components/global/Box";
 import LogoutButton from "../components/LogoutButton";
-import MainPanel from "../components/MainPanel";
-import Title from "../components/Title";
+import MainPanel from "../components/posts/MainPanel";
+import Title from "../components/global/Title";
 
 const Main = () => {
   const [posts, setPosts] = React.useState([]);
 
-  const { isLoading, isFetching, isSuccess } = useQuery(
+  const { isLoading, isSuccess } = useQuery(
     ["posts"],
     () => fetchData("get", "/api/posts"),
     {

@@ -1,5 +1,4 @@
 import React from "react";
-import { Form } from "react-bootstrap";
 import PostItem from "./PostItem";
 
 const List = (props) => {

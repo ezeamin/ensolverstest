@@ -1,7 +1,7 @@
 import React from 'react';
-import Box from '../components/Box';
-import AuthForm from '../components/AuthForm';
-import Title from '../components/Title';
+import Box from '../components/global/Box';
+import AuthForm from '../components/auth/AuthForm';
+import Title from '../components/global/Title';
 
 const Auth = (props) => {
     return (

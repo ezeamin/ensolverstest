@@ -1,11 +1,9 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchData } from "../api/fetchFunctions";
-import BackButton from "../components/BackButton";
-import Box from "../components/Box";
-import EditPanel from "../components/EditPanel";
-import NewPost from "../components/NewPost";
-import Title from "../components/Title";
+import Box from "../components/global/Box";
+import EditPanel from "../components/posts/EditPanel";
+import Title from "../components/global/Title";
 
 const EditPost = () => {
   const url = window.location.pathname;

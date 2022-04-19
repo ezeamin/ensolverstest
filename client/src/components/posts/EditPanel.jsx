@@ -1,12 +1,12 @@
 import React from "react";
-import BackButton from "./BackButton";
-import Loading from "./Loading";
-import NewPost from "./NewPost";
+import BackButton from "../global/BackButton";
+import Loading from "../global/Loading";
+import NewPost from "../NewPost";
 
 const EditPanel = (props) => {
   const { post, isSuccess } = props;
 
-  if (!isSuccess) {
+  if (Object.keys(post).length === 0 || !isSuccess) {
     return <Loading />;
   }
   return (

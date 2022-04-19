@@ -66,11 +66,13 @@ const AuthForm = (props) => {
         setLoading(false);
 
         if (!data || data.status !== 200) {
-          setError(data ? data.data.message : "Error creating user");
+          //validation error
+          if (data.data.err.errors[0].message) setError(data.data.err.errors[0].message);
+          //server error
+          else setError(data ? data.data.message : "Error creating user");
         } else {
           Swal.fire({
             title: "Welcome!",
-            icon: "success",
             showConfirmButton: false,
             timer: 2000,
           }).then(() => {
@@ -98,9 +100,8 @@ const AuthForm = (props) => {
         } else {
           Swal.fire({
             title: "Welcome!",
-            icon: "success",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 1500,
           }).then(() => {
             localStorage.setItem("token", data.data.token);
             navigate("/app");
@@ -116,12 +117,12 @@ const AuthForm = (props) => {
 
   // Error display
   React.useEffect(() => {
-    if (error) {
+    if (error && props.type === "signup") {
       errorMsg.current.style.display = "block";
     } else {
       errorMsg.current.style.display = "none";
     }
-  }, [error]);
+  }, [error,props.type]);
 
   return (
     <>

@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { fetchData } from "../api/fetchFunctions";
+import { fetchData } from "../../api/fetchFunctions";
 
 const ListButtons = (props) => {
   const navigate = useNavigate();
