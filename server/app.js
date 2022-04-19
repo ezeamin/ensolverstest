@@ -14,7 +14,7 @@ const postsRoutes = require("./routes/posts");
 // Settings & middlewares
 app.set("port", process.env.PORT || 5000);
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000","https://ensolverstest.netlify.app"]
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

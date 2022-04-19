@@ -66,7 +66,7 @@ const AuthForm = (props) => {
     {
       onSuccess: (data) => {
         if (!data || data.status !== 200) {
-          setError(data ? data : "Error creating user");
+          setError(data ? data.data.message : "Error creating user");
         } else {
           Swal.fire({
             title: "Welcome!",
