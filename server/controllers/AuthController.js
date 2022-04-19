@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   isAuthenticated(req, res, next) {
-    const token = req.headers["authorization"].split(" ")[1];
+    const token = req.headers["authorization"]?.split(" ")[1];
     if (token) {
       jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         if (err) {
@@ -12,7 +12,8 @@ module.exports = {
             message: "Invalid token",
           });
         }
-        req.user = decoded.user;
+        req.user = decoded;
+
         next();
       });
     } else {
@@ -29,9 +30,12 @@ module.exports = {
       password: bcrypt.hashSync(password, 10),
     })
       .then((user) => {
+        const token = logIn(user);
+
         res.json({
           message: "User created",
           user,
+          token,
         });
       })
       .catch((err) => {
@@ -95,8 +99,12 @@ module.exports = {
 };
 
 const logIn = (user) => {
-  const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
-    expiresIn: "2h",
-  });
+  const token = jwt.sign(
+    { id: user.id, username: user.username },
+    process.env.SECRET_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
   return token;
 };
