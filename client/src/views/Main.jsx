@@ -26,11 +26,11 @@ const Main = () => {
     <>
       <Box>
         <Title title="To-Do List" />
-        <h3>Folders</h3>
+        <h3>Posts</h3>
         <div className="list__container">
           {(posts.length !== 0 && !(isFetching || isLoading)) ? <List posts={posts} /> : <p>No data</p>}
         </div>
-        <NewPost />
+        <NewPost type="new"/>
       </Box>
       <LogoutButton />
     </>

@@ -12,7 +12,7 @@ export const fetchData = async (method, link, info) => {
   const token = localStorage.getItem("token");
 
   try {
-    if (method === "get") {
+    if (method === "get" || method === "delete") {
       res = await axios[method](link, {
         headers: {
           Authorization: `Bearer ${token}`,

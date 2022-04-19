@@ -1,12 +1,53 @@
 import React from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { fetchData } from "../api/fetchFunctions";
 
 const ListButtons = (props) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation(
+    (id) => fetchData("delete", `/api/posts/${id}`),
+    {
+      onSuccess: (data) => {
+        if (!data || data.status !== 200) {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: data.data.message ? data.data.message : "Error",
+          });
+        } else {
+          Swal.fire({
+            title: "Success",
+            text: "Post deleted",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          // Update the list of posts
+          queryClient.invalidateQueries("posts");
+        }
+      },
+      onError: (data) => {
+        let msg = data.text();
+        Swal.fire({
+          title: "Error",
+          text: msg,
+          icon: "error",
+        });
+      },
+    }
+  );
+
   const handleEdit = () => {
-    console.log("edit", props.id);
+    navigate(`/app/edit/${props.id}`);
   };
 
   const handleDelete = () => {
-    console.log("delete", props.id);
+    mutate(props.id);
   };
 
   return (

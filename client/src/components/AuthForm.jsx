@@ -4,6 +4,7 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { fetchData } from "../api/fetchFunctions";
+import BackButton from "./BackButton";
 
 const AuthForm = (props) => {
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ const AuthForm = (props) => {
   // server error message
   const errorMsg = React.useRef();
   const [error, setError] = React.useState(false);
-  //errorMsg.current.style.display = "none";
 
   const checkValidity = () => {
     let isValid = true;
@@ -53,8 +53,9 @@ const AuthForm = (props) => {
 
     setLoading(true);
 
-    if (props.type === "login") signin({ username, password });
-    else signup({ username, password });
+    const data = { username, password };
+    if (props.type === "login") signin(data);
+    else signup(data);
 
     setLoading(false);
   };
@@ -111,6 +112,7 @@ const AuthForm = (props) => {
     }
   );
 
+  // Error display
   React.useEffect(() => {
     if (error) {
       errorMsg.current.style.display = "block";
@@ -121,7 +123,12 @@ const AuthForm = (props) => {
 
   return (
     <>
-      <Alert variant="danger" ref={errorMsg} style={{ display: "none" }} className="text-center">
+      <Alert
+        variant="danger"
+        ref={errorMsg}
+        style={{ display: "none" }}
+        className="text-center"
+      >
         {error}
       </Alert>
       <Form onSubmit={handleSubmit}>
@@ -166,15 +173,7 @@ const AuthForm = (props) => {
             Sign up
           </Button>
         ) : (
-          <div className="text-center mt-4">
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="signup__backButton"
-            >
-              Back
-            </button>
-          </div>
+          <BackButton />
         )}
       </Form>
     </>

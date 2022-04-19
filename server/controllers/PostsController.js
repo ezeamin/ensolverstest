@@ -43,4 +43,63 @@ module.exports = {
         res.json(err);
       });
   },
+
+  getPost(req, res) {
+    DbUsers.findOne({
+      where: {
+        id: req.user.id,
+      },
+      include: [
+        {
+          model: DbPosts,
+        },
+      ],
+    })
+      .then((user) => {
+        const post = user.posts.filter((post) => {
+          console.log(post);
+          if (post.id === +req.params.id) {
+            return post;
+          }
+        })[0];
+        res.json(post);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  },
+
+  putPost(req, res) {
+    DbPosts.update(
+      {
+        text: req.body.text,
+        isDone: req.body.isDone,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
+      .then((post) => {
+        res.json(post);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  },
+
+  deletePost(req, res) {
+    DbPosts.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then((post) => {
+        res.json(post);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  },
 };
