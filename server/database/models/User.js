@@ -1,5 +1,6 @@
 const { Model,DataTypes } = require('sequelize');
 const sequelize = require('../db');
+const Post = require('./Post');
 
 class User extends Model {};
 User.init({
@@ -25,5 +26,8 @@ User.init({
     modelName: 'users',
     timestamps: false
 });
+
+User.hasMany(Post);
+Post.belongsTo(User);
 
 module.exports = User;

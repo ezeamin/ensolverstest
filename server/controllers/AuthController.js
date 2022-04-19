@@ -3,6 +3,25 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
+  isAuthenticated(req, res, next) {
+    const token = req.headers["authorization"].split(" ")[1];
+    if (token) {
+      jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+          return res.status(401).json({
+            message: "Invalid token",
+          });
+        }
+        req.user = decoded.user;
+        next();
+      });
+    } else {
+      return res.status(401).json({
+        message: "No token provided",
+      });
+    }
+  },
+
   signUp(req, res) {
     const { username, password } = req.body;
     DbUser.create({
@@ -33,7 +52,6 @@ module.exports = {
       .then((user) => {
         if (user) {
           if (bcrypt.compareSync(password, user.password)) {
-
             const token = logIn(user);
 
             res.json({
@@ -81,4 +99,4 @@ const logIn = (user) => {
     expiresIn: "2h",
   });
   return token;
-}
+};
