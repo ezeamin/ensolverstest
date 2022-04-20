@@ -7,6 +7,7 @@ const cors = require("cors");
 const app = express();
 
 // Require routes
+const configRoutes = require("./routes/config");
 const authRoutes = require("./routes/auth");
 const postsRoutes = require("./routes/posts");
 const establishConnection = require("./database/connection");
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 // Routes
+app.use("/api", configRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postsRoutes);
 

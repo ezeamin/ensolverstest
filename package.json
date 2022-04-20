@@ -1,17 +1,18 @@
 {
   "name": "ensolverstest",
   "version": "1.0.0",
-  "description": "Readme in progress.",
+  "description": "A to-do list application",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\""
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ezeamin/ensolverstest.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["todo", "list"],
+  "author": "Ezequiel Amin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ezeamin/ensolverstest/issues"

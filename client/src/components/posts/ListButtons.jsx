@@ -43,7 +43,7 @@ const ListButtons = (props) => {
   );
 
   const handleEdit = () => {
-    navigate(`/app/edit/${props.id}`);
+    navigate(`/edit/${props.id}`);
   };
 
   const handleDelete = () => {

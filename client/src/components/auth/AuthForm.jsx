@@ -78,7 +78,7 @@ const AuthForm = (props) => {
             timer: 2000,
           }).then(() => {
             localStorage.setItem("token", data.data.token);
-            navigate("/app");
+            navigate("/");
           });
         }
       },
@@ -105,7 +105,7 @@ const AuthForm = (props) => {
             timer: 1500,
           }).then(() => {
             localStorage.setItem("token", data.data.token);
-            navigate("/app");
+            navigate("/");
           });
         }
       },
