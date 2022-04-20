@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { fetchData } from "../api/fetchFunctions";
+import { fetchData } from "../../api/fetchFunctions";
 
 const NewPost = (props) => {
   const [post, setPost] = React.useState("");
@@ -32,11 +32,9 @@ const NewPost = (props) => {
       } else {
         setPost("");
         Swal.fire({
-          title: "Success",
-          text: "Post saved",
           icon: "success",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 1000,
         }).then(() => {
           if (props.type === "edit") {
             navigate("/app"); //back to main page

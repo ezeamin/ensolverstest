@@ -3,8 +3,8 @@ import { Alert, Button, Form } from "react-bootstrap";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { fetchData } from "../api/fetchFunctions";
-import BackButton from "./BackButton";
+import { fetchData } from "../../api/fetchFunctions";
+import BackButton from "../global/BackButton";
 
 const AuthForm = (props) => {
   const navigate = useNavigate();
@@ -56,8 +56,6 @@ const AuthForm = (props) => {
     const data = { username, password };
     if (props.type === "login") signin(data);
     else signup(data);
-
-    setLoading(false);
   };
 
   // signup
@@ -65,21 +63,28 @@ const AuthForm = (props) => {
     (info) => fetchData("post", "/api/auth/signup", info),
     {
       onSuccess: (data) => {
+        setLoading(false);
+
         if (!data || data.status !== 200) {
-          setError(data ? data : "Error creating user");
+          //validation error
+          if (data.data.err.errors[0].message)
+            setError(data.data.err.errors[0].message);
+          //server error
+          else setError(data ? data.data.message : "Error creating user");
         } else {
           Swal.fire({
             title: "Welcome!",
-            icon: "success",
             showConfirmButton: false,
             timer: 2000,
           }).then(() => {
             localStorage.setItem("token", data.data.token);
-            navigate("/app");
+            navigate("/");
           });
         }
       },
       onError: (data) => {
+        setLoading(false);
+
         let msg = data.text();
         setError(msg);
       },
@@ -96,12 +101,11 @@ const AuthForm = (props) => {
         } else {
           Swal.fire({
             title: "Welcome!",
-            icon: "success",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 1500,
           }).then(() => {
             localStorage.setItem("token", data.data.token);
-            navigate("/app");
+            navigate("/");
           });
         }
       },
@@ -165,7 +169,10 @@ const AuthForm = (props) => {
         </Button>
         {props.type === "login" ? (
           <Button
-            onClick={() => navigate("/signup")}
+            onClick={() => {
+              setError(null);
+              navigate("/signup");
+            }}
             type="button"
             variant="secondary"
             className="w-100 mt-4"
@@ -173,7 +180,7 @@ const AuthForm = (props) => {
             Sign up
           </Button>
         ) : (
-          <BackButton />
+          <BackButton setError={setError} />
         )}
       </Form>
     </>

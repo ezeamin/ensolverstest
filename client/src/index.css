@@ -37,3 +37,22 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(170, 170, 170); 
 }
+
+/* Swal popup styling */
+
+.swal2-popup{
+  width: 80% !important;
+  border-radius: 20px !important;
+}
+
+@media screen and (min-width: 768px){
+  .swal2-popup{
+    width: 35% !important;
+  }
+}
+
+@media screen and (min-width: 992px){
+  .swal2-popup{
+    width: 25% !important;
+  }
+}

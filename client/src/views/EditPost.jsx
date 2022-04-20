@@ -1,10 +1,9 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchData } from "../api/fetchFunctions";
-import BackButton from "../components/BackButton";
-import Box from "../components/Box";
-import NewPost from "../components/NewPost";
-import Title from "../components/Title";
+import Box from "../components/global/Box";
+import EditPanel from "../components/posts/EditPanel";
+import Title from "../components/global/Title";
 
 const EditPost = () => {
   const url = window.location.pathname;
@@ -13,7 +12,7 @@ const EditPost = () => {
 
   const [post, setPost] = React.useState({});
 
-  const { isLoading, isFetching } = useQuery(
+  const { isSuccess } = useQuery(
     ["post", id],
     () => fetchData("get", `/api/posts/${id}`),
     {
@@ -28,10 +27,7 @@ const EditPost = () => {
   return (
     <Box>
       <Title title="Editing post" />
-      <p className="mb-0">Old: {post.text}</p>
-      <p className="mb-0">New:</p>
-      <NewPost type="edit" {...post} />
-      <BackButton />
+      <EditPanel post={post} isSuccess={isSuccess}/>
     </Box>
   );
 };

@@ -39,7 +39,7 @@ module.exports = {
         });
       })
       .catch((err) => {
-        res.json({
+        res.status(500).json({
           message: "Error creating user",
           err,
         });
@@ -75,7 +75,7 @@ module.exports = {
         }
       })
       .catch((err) => {
-        res.json({
+        res.status(500).json({
           message: "Error logging in user",
           err,
         });

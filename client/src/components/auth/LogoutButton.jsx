@@ -1,5 +1,5 @@
 import React from 'react';
-import { logout } from '../api/fetchFunctions';
+import { logout } from '../../api/fetchFunctions';
 
 const LogoutButton = () => {
     return (

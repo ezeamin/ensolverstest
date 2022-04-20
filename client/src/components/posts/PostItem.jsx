@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { useMutation } from "react-query";
 import Swal from "sweetalert2";
-import { fetchData } from "../api/fetchFunctions";
+import { fetchData } from "../../api/fetchFunctions";
 import ListButtons from "./ListButtons";
 
 const PostItem = (props) => {

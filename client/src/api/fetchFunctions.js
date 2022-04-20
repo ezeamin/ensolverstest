@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 import axios from "./axios";
 
 // initiate server
-
 export const pingServer = async () => {
   await axios.get("/api/ping");
 };
@@ -42,7 +41,7 @@ export const fetchData = async (method, link, info) => {
   return data;
 };
 
-export const logout = (home) => {
+export const logout = () => {
   localStorage.removeItem("token");
 
   Swal.fire({
@@ -50,6 +49,6 @@ export const logout = (home) => {
     showConfirmButton: false,
     timer: 1500,
   }).then(() => {
-    window.location.href = "/";
+    window.location.href = "/login";
   });
 };

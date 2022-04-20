@@ -1,16 +1,15 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchData } from "../api/fetchFunctions";
-import Box from "../components/Box";
-import List from "../components/List";
-import LogoutButton from "../components/LogoutButton";
-import NewPost from "../components/NewPost";
-import Title from "../components/Title";
+import Box from "../components/global/Box";
+import LogoutButton from "../components/auth/LogoutButton";
+import MainPanel from "../components/posts/MainPanel";
+import Title from "../components/global/Title";
 
 const Main = () => {
   const [posts, setPosts] = React.useState([]);
 
-  const { isLoading, isFetching } = useQuery(
+  const { isLoading, isSuccess } = useQuery(
     ["posts"],
     () => fetchData("get", "/api/posts"),
     {
@@ -26,11 +25,7 @@ const Main = () => {
     <>
       <Box>
         <Title title="To-Do List" />
-        <h3>Posts</h3>
-        <div className="list__container">
-          {(posts.length !== 0 && !(isFetching || isLoading)) ? <List posts={posts} /> : <p>No data</p>}
-        </div>
-        <NewPost type="new"/>
+        <MainPanel posts={posts} isSuccess={isSuccess} isLoading={isLoading} />
       </Box>
       <LogoutButton />
     </>
