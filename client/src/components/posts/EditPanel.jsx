@@ -1,7 +1,7 @@
 import React from "react";
 import BackButton from "../global/BackButton";
 import Loading from "../global/Loading";
-import NewPost from "../NewPost";
+import NewPost from "./NewPost";
 
 const EditPanel = (props) => {
   const { post, isSuccess } = props;

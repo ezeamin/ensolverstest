@@ -1,7 +1,7 @@
 import React from "react";
 import List from "./List";
 import Loading from "../global/Loading";
-import NewPost from "../NewPost";
+import NewPost from "./NewPost";
 
 const MainPanel = (props) => {
   const { posts, isSuccess } = props;

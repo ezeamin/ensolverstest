@@ -3,8 +3,8 @@ import { Alert, Button, Form } from "react-bootstrap";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { fetchData } from "../api/fetchFunctions";
-import BackButton from "./BackButton";
+import { fetchData } from "../../api/fetchFunctions";
+import BackButton from "../global/BackButton";
 
 const AuthForm = (props) => {
   const navigate = useNavigate();
@@ -67,7 +67,8 @@ const AuthForm = (props) => {
 
         if (!data || data.status !== 200) {
           //validation error
-          if (data.data.err.errors[0].message) setError(data.data.err.errors[0].message);
+          if (data.data.err.errors[0].message)
+            setError(data.data.err.errors[0].message);
           //server error
           else setError(data ? data.data.message : "Error creating user");
         } else {
@@ -117,12 +118,12 @@ const AuthForm = (props) => {
 
   // Error display
   React.useEffect(() => {
-    if (error && props.type === "signup") {
+    if (error) {
       errorMsg.current.style.display = "block";
     } else {
       errorMsg.current.style.display = "none";
     }
-  }, [error,props.type]);
+  }, [error]);
 
   return (
     <>
@@ -168,7 +169,10 @@ const AuthForm = (props) => {
         </Button>
         {props.type === "login" ? (
           <Button
-            onClick={() => navigate("/signup")}
+            onClick={() => {
+              setError(null);
+              navigate("/signup");
+            }}
             type="button"
             variant="secondary"
             className="w-100 mt-4"
@@ -176,7 +180,7 @@ const AuthForm = (props) => {
             Sign up
           </Button>
         ) : (
-          <BackButton />
+          <BackButton setError={setError} />
         )}
       </Form>
     </>

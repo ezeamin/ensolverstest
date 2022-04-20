@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { fetchData } from "../api/fetchFunctions";
+import { fetchData } from "../../api/fetchFunctions";
 
 const NewPost = (props) => {
   const [post, setPost] = React.useState("");

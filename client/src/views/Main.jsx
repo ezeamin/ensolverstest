@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { fetchData } from "../api/fetchFunctions";
 import Box from "../components/global/Box";
-import LogoutButton from "../components/LogoutButton";
+import LogoutButton from "../components/auth/LogoutButton";
 import MainPanel from "../components/posts/MainPanel";
 import Title from "../components/global/Title";
 
