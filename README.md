@@ -14,6 +14,8 @@ Built with React, Node.js, Express and mySQL.
 
 ## Dependencies
 
+Package Manager: [npm](https://www.npmjs.com/) 
+
 - Global dependencies:
   - [Concurrently](https://www.npmjs.com/package/concurrently) (v7.1.0)
 - Client dependencies:
@@ -25,6 +27,8 @@ Built with React, Node.js, Express and mySQL.
   - [Axios](https://axios-http.com/) (v0.26.1)
   - [SweetAlert2](https://sweetalert2.github.io/) (v11.4.8)
 - Server dependencies:
+    
+    JavaScript runtime: [Node.js](https://nodejs.org/en/) (v16.13.1)
   - [Express](https://expressjs.com/) (v4.17.3)
   - [Morgan](https://github.com/expressjs/morgan#readme) (v1.10.0)
   - [cors](https://github.com/expressjs/cors#readme) (v2.8.5)
@@ -37,7 +41,7 @@ Built with React, Node.js, Express and mySQL.
 
 ## Installation
 
-#### Important: You **must** have node.js installed on your machine. [Download here](https://nodejs.org/en/download/)
+#### Important: You **must** have node.js (tested on v16.13.1) installed on your machine. [Download here](https://nodejs.org/en/download/)
 
 ### There are two ways of initializing this project after cloning it
 
