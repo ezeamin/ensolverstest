@@ -54,23 +54,23 @@ const AuthForm = (props) => {
     setLoading(true);
 
     const info = { username, password };
-    mutate(info)
+    mutate(info);
   };
 
   // login & signup
   const { mutate } = useMutation(
     (info) => {
-      const route = props.type === "login" ? "/api/auth/signin" : "/api/auth/signup";
+      const route =
+        props.type === "login" ? "/api/auth/signin" : "/api/auth/signup";
       return fetchData("post", route, info);
     },
     {
       onSuccess: (data) => {
         setLoading(false);
-        console.log(data)
-        
+
         if (!data || data.status !== 200) {
           //validation error
-          if (data.data.err.errors[0].message)
+          if (data.data?.err?.errors[0]?.message)
             setError(data.data.err.errors[0].message);
           //server error
           else setError(data ? data.data.message : "Error");
@@ -88,8 +88,12 @@ const AuthForm = (props) => {
       onError: (data) => {
         setLoading(false);
 
-        let msg = data.text();
-        setError(msg);
+        if (data.data.message) {
+          setError(data.data.message);
+        } else {
+          let msg = data.text();
+          setError(msg);
+        }
       },
     }
   );
