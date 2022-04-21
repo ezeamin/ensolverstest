@@ -1,11 +1,16 @@
+const AuthController = require("../controllers/AuthController");
 const sequelize = require("./db");
 
 const connect = () => {
   return new Promise((resolve, reject) => {
-    sequelize
-      .sync({ force: false })
-      .then(() => resolve())
-      .catch((err) => reject());
+    try{
+      sequelize
+        .sync({ force: false })
+        .then(() => resolve())
+        .catch((err) => reject());
+    } catch (err) {
+      reject(err);
+    }
   });
 };
 
@@ -24,6 +29,9 @@ const establishConnection = async (server) => {
     try {
       await connect();
       console.log("Connected to database");
+
+      // Admin user creation
+      AuthController.createAdmin();
 
       return;
     } catch (err) {

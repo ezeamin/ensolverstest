@@ -54,22 +54,20 @@ const AuthForm = (props) => {
     setLoading(true);
 
     const info = { username, password };
-    if (props.type === "login") mutate(info, "login");
-    else mutate(info, "signup");
+    mutate(info)
   };
-
-  const auth = (info, type) => {};
 
   // login & signup
   const { mutate } = useMutation(
-    (info, type) => {
-      const route = type === "login" ? "/api/auth/signin" : "/api/auth/signup";
-      fetchData("post", route, info);
+    (info) => {
+      const route = props.type === "login" ? "/api/auth/signin" : "/api/auth/signup";
+      return fetchData("post", route, info);
     },
     {
       onSuccess: (data) => {
         setLoading(false);
-
+        console.log(data)
+        
         if (!data || data.status !== 200) {
           //validation error
           if (data.data.err.errors[0].message)
