@@ -1,8 +1,15 @@
 {
   "short_name": "Todo List",
-  "name": "Create a To-Do list",
+  "name": "To-Do list",
   "start_url": ".",
+  "icons": [
+    {
+      "src": "./img/favicon.webp",
+      "sizes": "32x32",
+      "type": "image/webp"
+    }
+  ],
   "display": "standalone",
-  "theme_color": "#222222",
-  "background_color": "#222222"
+  "theme_color": "#302c2c",
+  "background_color": "#302c2c"
 }

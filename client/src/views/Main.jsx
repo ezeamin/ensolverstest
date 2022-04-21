@@ -8,8 +8,9 @@ import Title from "../components/global/Title";
 
 const Main = () => {
   const [posts, setPosts] = React.useState([]);
+  const [isError, setIsError] = React.useState(false);
 
-  const { isLoading, isSuccess } = useQuery(
+  const { isLoading, isSuccess, isFetching } = useQuery(
     ["posts"],
     () => fetchData("get", "/api/posts"),
     {
@@ -17,7 +18,13 @@ const Main = () => {
         if (data.status === 200) {
           setPosts(data.data);
         }
+        else {
+          setIsError(true);
+        }
       },
+      onError: () => {
+        setIsError(true);
+      }
     }
   );
 
@@ -25,7 +32,7 @@ const Main = () => {
     <>
       <Box>
         <Title title="To-Do List" />
-        <MainPanel posts={posts} isSuccess={isSuccess} isLoading={isLoading} />
+        <MainPanel posts={posts} isSuccess={isSuccess} isLoading={isLoading} isFetching={isFetching} isError={isError}/>
       </Box>
       <LogoutButton />
     </>

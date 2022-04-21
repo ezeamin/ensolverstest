@@ -14,8 +14,8 @@ const NewPost = (props) => {
 
   // For editing posts
   React.useEffect(() => {
-    setPost(props.text);
-  }, [props.text]);
+    if(props.type === "edit") setPost(props.text);
+  }, [props.type,props.text]);
 
   const method = props.type === "edit" ? "put" : "post";
   const url = props.type === "edit" ? `/api/posts/${props.id}` : "/api/posts";
@@ -37,7 +37,7 @@ const NewPost = (props) => {
           timer: 1000,
         }).then(() => {
           if (props.type === "edit") {
-            navigate("/app"); //back to main page
+            navigate("/"); //back to main page
           }
         });
 

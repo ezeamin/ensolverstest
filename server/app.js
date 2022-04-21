@@ -6,11 +6,14 @@ const cors = require("cors");
 
 const app = express();
 
+// Helpers
+const establishConnection = require("./database/connection");
+const AuthController = require("./controllers/AuthController");
+
 // Require routes
 const configRoutes = require("./routes/config");
 const authRoutes = require("./routes/auth");
 const postsRoutes = require("./routes/posts");
-const establishConnection = require("./database/connection");
 
 // Settings & middlewares
 app.set("port", process.env.PORT || 5000);
@@ -27,6 +30,9 @@ app.use(morgan("dev"));
 app.use("/api", configRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postsRoutes);
+
+// Admin user creation
+AuthController.createAdmin();
 
 // Server start
 const server = app.listen(app.get("port"), () => {

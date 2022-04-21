@@ -11,15 +11,21 @@ const EditPost = () => {
   const id = split[split.length - 1];
 
   const [post, setPost] = React.useState({});
+  const [isError, setIsError] = React.useState(false);
 
   const { isSuccess } = useQuery(
     ["post", id],
     () => fetchData("get", `/api/posts/${id}`),
     {
       onSuccess: (data) => {
-        if (data.status === 200) {
+        if (data.status === 200 && data.data) {
           setPost(data.data);
+        } else {
+          setIsError(true);
         }
+      },
+      onError: () => {
+        setIsError(true);
       },
     }
   );
@@ -27,7 +33,7 @@ const EditPost = () => {
   return (
     <Box>
       <Title title="Editing post" />
-      <EditPanel post={post} isSuccess={isSuccess}/>
+      <EditPanel post={post} isSuccess={isSuccess} isError={isError} />
     </Box>
   );
 };

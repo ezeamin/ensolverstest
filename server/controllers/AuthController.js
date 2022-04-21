@@ -23,6 +23,26 @@ module.exports = {
     }
   },
 
+  createAdmin() {
+    if (
+      !DbUser.findOne({
+        where: {
+          username: "admin",
+        },
+      })
+    ) {
+      try {
+        const hashedPass = bcrypt.hashSync("admin", 10);
+        DbUser.create({
+          username: "admin",
+          password: hashedPass,
+        });
+      } catch (err) {
+        console.log("user already exists");
+      }
+    }
+  },
+
   signUp(req, res) {
     const { username, password } = req.body;
     DbUser.create({

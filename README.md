@@ -1,16 +1,20 @@
 # Welcome to my To-Do List App 👋
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/ezeamin/ensolverstest#readme)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ezeamin/ensolverstest/graphs/commit-activity)
 
 ### A to-do list application for Ensolvers recruitment process.
 
-Built with React, Node.js, Express and mySQL.
+Built with React, Node.js, Express and mySQL. 
+
+It exposes a CRUD API for the front-end and a REST API for the back-end. It has a user authentication system with JWT. All back-end and front-end routes are protected. 
 
 ### 🏠 [Homepage](https://github.com/ezeamin/ensolverstest#readme)
 
-### ✨ [Demo](https://ensolverstest.netlify.app)
+### ✨ [Client Demo](https://ensolverstest.netlify.app)
+
+### 💫 [Server Demo](https://ensolverstest.herokuapp.com) (use along with client)
 
 ## Dependencies
 
@@ -47,8 +51,8 @@ Package Manager: [npm](https://www.npmjs.com/)
 
 - Method One (Recommended):
 
-  - Windows: Run the `win-start.bat` script provided in the root directory of the project.
-  - Linux/macOs: Run the `lin-start.sh` script provided in the root directory of the project.
+  - Windows: Run the `win-init.bat` script provided in the root directory of the project.
+  - Linux/macOs: Run the `sh-init.sh` script provided in the root directory of the project.
 
 - Method Two (Manual):
 
@@ -84,7 +88,7 @@ Package Manager: [npm](https://www.npmjs.com/)
 
   - Step 2: Create database
 
-    This app works with a mySQL database. You shall create a new local database and a user with admin rights. Otherwise, you can initiate a new mySQL cloud database and properly connect to it.
+    This app works with a mySQL database. You shall create a new local database and a user with admin rights over it. Otherwise, you can initiate a new mySQL cloud database and properly connect to it.
 
     Tables will be created automatically.
 
@@ -94,23 +98,31 @@ Package Manager: [npm](https://www.npmjs.com/)
 
     2- Create a .env empty file
 
-    3- Fill in the file with the guidelines provided at the _.env-sample_ file in the same directory. During this step, you'll use your local DB information.
+    3- Fill in the file with the guidelines provided at the `.env-sample` file in the same directory. During this step, you'll use your local/cloud DB information.
 
 ## Usage
 
 #### Important: You will first need to make sure your mySQL database is up and running.
 
-After installation, you can use the following command on the root directory to start both server and client concurrently.
+After installation, you can do the following:
+- Windows: Run the `win-init.sh` script provided in the root directory of the project.
+- Linux/macOs: Run the `sh-start.sh` script provided in the root directory of the project.
+
+Otherwise, run the following command on the root directory to start both server and client concurrently.
 
 ```sh
-npm run start
+npm start
 ```
 
 Server will start and listen on port 5000. Client will start on port 3000.
 
+Folder creation is not supported yet. 
+
+On the hosted app, default user is admin/admin. However, you can create one by simply setting your username and password.
+
 ## Author
 
-👤 **Ezequiel Amin**
+👤 **Ezequiel Amin** - Full Stack MERN Developer
 
 - Website: https://ezequielamin.com
 - Github: [ezeamin](https://github.com/ezeamin)
@@ -121,6 +133,8 @@ Server will start and listen on port 5000. Client will start on port 3000.
 Contributions, issues and feature requests are welcome!
 
 Feel free to check [issues page](https://github.com/ezeamin/ensolverstest/issues).
+
+Important: This app has no tests done because there wasn't enough time to do so.
 
 ## Show your support
 
