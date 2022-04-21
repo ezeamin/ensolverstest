@@ -23,13 +23,13 @@ module.exports = {
     }
   },
 
-  createAdmin() {
+  async createAdmin() {
     if (
-      !DbUser.findOne({
+      !(await DbUser.findOne({
         where: {
           username: "admin",
         },
-      })
+      }))
     ) {
       try {
         const hashedPass = bcrypt.hashSync("admin", 10);
@@ -37,9 +37,9 @@ module.exports = {
           username: "admin",
           password: hashedPass,
         });
-      } catch (err) {
-        console.log("user already exists");
-      }
+      } catch (err) {}
+    } else {
+      console.log("Admin already exists");
     }
   },
 

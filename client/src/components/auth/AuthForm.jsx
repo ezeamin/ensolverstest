@@ -53,14 +53,19 @@ const AuthForm = (props) => {
 
     setLoading(true);
 
-    const data = { username, password };
-    if (props.type === "login") signin(data);
-    else signup(data);
+    const info = { username, password };
+    if (props.type === "login") mutate(info, "login");
+    else mutate(info, "signup");
   };
 
-  // signup
-  const { mutate: signup } = useMutation(
-    (info) => fetchData("post", "/api/auth/signup", info),
+  const auth = (info, type) => {};
+
+  // login & signup
+  const { mutate } = useMutation(
+    (info, type) => {
+      const route = type === "login" ? "/api/auth/signin" : "/api/auth/signup";
+      fetchData("post", route, info);
+    },
     {
       onSuccess: (data) => {
         setLoading(false);
@@ -70,7 +75,7 @@ const AuthForm = (props) => {
           if (data.data.err.errors[0].message)
             setError(data.data.err.errors[0].message);
           //server error
-          else setError(data ? data.data.message : "Error creating user");
+          else setError(data ? data.data.message : "Error");
         } else {
           Swal.fire({
             title: "Welcome!",
@@ -85,31 +90,6 @@ const AuthForm = (props) => {
       onError: (data) => {
         setLoading(false);
 
-        let msg = data.text();
-        setError(msg);
-      },
-    }
-  );
-
-  // signin
-  const { mutate: signin } = useMutation(
-    (info) => fetchData("post", "/api/auth/signin", info),
-    {
-      onSuccess: (data) => {
-        if (!data || data.status !== 200) {
-          setError(data ? data.data.message : "Error signing in");
-        } else {
-          Swal.fire({
-            title: "Welcome!",
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(() => {
-            localStorage.setItem("token", data.data.token);
-            navigate("/");
-          });
-        }
-      },
-      onError: (data) => {
         let msg = data.text();
         setError(msg);
       },
